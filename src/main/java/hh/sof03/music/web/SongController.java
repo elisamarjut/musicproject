@@ -1,0 +1,26 @@
+package hh.sof03.music.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import hh.sof03.music.domain.SongRepository;
+
+@Controller
+public class SongController {
+
+    @Autowired
+    private SongRepository songRepository;
+
+    @RequestMapping("index")
+    public String welcome() {
+        return "welcome";
+    }
+
+    @RequestMapping("/songlist")
+    public String listSongs(Model model) {
+        model.addAttribute("songs", songRepository.findAll());
+        return "songlist";
+    }
+}
