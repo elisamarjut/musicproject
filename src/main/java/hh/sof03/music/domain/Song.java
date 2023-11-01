@@ -17,7 +17,7 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long songId;
 
-    private String songName, lyrics;
+    private String songName;
     private double length;
 
     @ManyToMany
@@ -33,9 +33,8 @@ public class Song {
     public Song() {
     }
 
-    public Song(String songName, String lyrics, double length, List<Artist> artists, Genre genre, Album album) {
+    public Song(String songName, double length, List<Artist> artists, Genre genre, Album album) {
         this.songName = songName;
-        this.lyrics = lyrics;
         this.length = length;
         this.artists = artists;
         this.genre = genre;
@@ -56,14 +55,6 @@ public class Song {
 
     public void setSongName(String songName) {
         this.songName = songName;
-    }
-
-    public String getLyrics() {
-        return lyrics;
-    }
-
-    public void setLyrics(String lyrics) {
-        this.lyrics = lyrics;
     }
 
     public double getLength() {

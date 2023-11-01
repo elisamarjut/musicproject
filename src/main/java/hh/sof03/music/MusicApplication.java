@@ -23,11 +23,11 @@ public class MusicApplication {
 	public CommandLineRunner demodata(SongRepository songRepository, UserRepository userRepository) {
 		return (args) -> {
 			log.info("Save a few songs");
-			Song s1 = new Song("Tässä on kaikki", "Onks se vaan niin et tässä hetkes on kaikki", 2.47, null, null,
+			Song s1 = new Song("Tässä on kaikki", 2.47, null, null,
 					null);
-			Song s2 = new Song("Kyynelii", "Tänään mä tanssin pimees", 3.23, null, null,
+			Song s2 = new Song("Kyynelii", 3.23, null, null,
 					null);
-			Song s3 = new Song("Junio", "Lyrics en espanol", 2.48, null, null,
+			Song s3 = new Song("Junio", 2.48, null, null,
 					null);
 
 			songRepository.save(s1);
