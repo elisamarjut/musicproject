@@ -13,9 +13,9 @@ public class ArtistController {
     @Autowired
     private ArtistRepository artistRepository;
 
-    @RequestMapping("/artistlist")
+    @RequestMapping("/list/artistlist")
     public String listArtists(Model model) {
         model.addAttribute("artists", artistRepository.findAll());
-        return "artistlist";
+        return "list/artistlist";
     }
 }

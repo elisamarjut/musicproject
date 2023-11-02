@@ -13,9 +13,9 @@ public class AlbumController {
     @Autowired
     private AlbumRepository albumRepository;
 
-    @RequestMapping("/albumlist")
+    @RequestMapping("/list/albumlist")
     public String listAlbums(Model model) {
         model.addAttribute("albums", albumRepository.findAll());
-        return "albumlist";
+        return "list/albumlist";
     }
 }

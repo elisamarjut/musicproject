@@ -13,9 +13,9 @@ public class GenreController {
     @Autowired
     private GenreRepository genreRepository;
 
-    @RequestMapping("/genrelist")
+    @RequestMapping("/list/genrelist")
     public String genreList(Model model) {
         model.addAttribute("genres", genreRepository.findAll());
-        return "genrelist";
+        return "list/genrelist";
     }
 }

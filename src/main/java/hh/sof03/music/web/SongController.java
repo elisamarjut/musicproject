@@ -26,39 +26,39 @@ public class SongController {
     }
 
     // List all songs
-    @GetMapping("/songlist")
+    @GetMapping("/list/songlist")
     public String listSongs(Model model) {
         model.addAttribute("songs", songRepository.findAll());
-        return "songlist";
+        return "list/songlist";
     }
 
     // Add a new song
-    @GetMapping("/addsong")
+    @GetMapping("/add/addsong")
     public String addSong(Model model) {
         model.addAttribute("song", new Song());
         model.addAttribute("genres", genreRepository.findAll());
-        return "addsong";
+        return "add/addsong";
     }
 
     // Save song
     @PostMapping("/savesong")
     public String saveSong(Song song) {
         songRepository.save(song);
-        return "redirect:/songlist";
+        return "redirect:/list/songlist";
     }
 
     // Delete song
     @GetMapping("/deletesong/{id}")
     public String deleteSong(@PathVariable("id") Long songId, Model model) {
         songRepository.deleteById(songId);
-        return "redirect:../songlist";
+        return "redirect:../list/songlist";
     }
 
     // Edit song
-    @GetMapping("/editsong/{id}")
+    @GetMapping("/edit/editsong/{id}")
     public String editSong(@PathVariable("id") Long songId, Model model) {
         model.addAttribute("song", songRepository.findById(songId));
         model.addAttribute("genres", genreRepository.findAll());
-        return "editsong";
+        return "edit/editsong";
     }
 }
