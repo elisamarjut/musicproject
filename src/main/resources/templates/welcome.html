@@ -2,20 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Musicapp</title>
+    <title>Music App</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        div {
+            text-align: center;
+        }
+    </style>
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/128/6654/6654978.png">
 </head>
 
 <body>
     <h1>Welcome to my MusicApp!</h1>
-
-    <a href="/songlist">List of song recommendations</a><br />
-    <a href="/artistlist">List of recommended artists</a><br />
-    <a href="/albumlist">List of recommended albums</a><br />
-    <a href="/genrelist">List of genres</a>
-
+    <div>
+        <div style="clear: both; display: block; height: 20px;"></div>
+        <a href="/songlist" class="btn btn-primary">List of song recommendations</a>
+        <div style="clear: both; display: block; height: 20px;"></div>
+        <a href="/artistlist" class="btn btn-primary">List of recommended artists</a>
+        <div style="clear: both; display: block; height: 20px;"></div>
+        <a href="/albumlist" class="btn btn-primary">List of recommended albums</a>
+        <div style="clear: both; display: block; height: 20px;"></div>
+        <a href="/genrelist" class="btn btn-primary">List of genres</a>
+    </div>
 </body>
 
 </html>
