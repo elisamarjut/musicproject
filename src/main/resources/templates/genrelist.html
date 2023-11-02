@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
-    <title>List of songs</title>
+    <title>List of genres</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/128/6654/6654978.png">
 </head>
 
 <body>
-    <h1>Songs</h1>
+    <h1>Genres</h1>
     <div class="col-md-4">
         <h3>Welcome <span sec:authentication="name"></span></h3>
     </div>
@@ -21,32 +21,25 @@
     <table class="table table-striped">
         <tbody>
             <tr>
-                <th>Song</th>
-                <th>Length</th>
-                <!--<th>Artist</th> -->
-                <th>Genre</th>
-                <th>Album</th>
-                <th></th>
-                <th></th>
+                <th>Name</th>
+                <th>Songs</th>
+                <th>Albums</th>
             </tr>
-            <tr th:each="song : ${songs}">
-                <td th:text="${song.songName}">Name</td>
-                <td th:text="${song.length}">Length</td>
-                <!-- <td th:text="${song.artists}">Artist</td> -->
-                <td th:text="${song.genre}">Genre</td>
-                <td th:text="${song.album!=null?song.album.albumName:''}">Album</td>
+            <tr th:each="genre : ${genres}">
+                <td th:text="${genre.genreName}">Name</td>
+                <!-- <td th:text="${genre.songs}">Songs</td>
+                <td th:text="${genre.albums}">Albums</td> -->
                 <td sec:authorize="hasAuthority('ADMIN')">
-                    <a th:href="@{/deletesong/{id}(id=${song.songId})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/deletegenre/{id}(id=${genre.genreId})}" class="btn btn-danger">Delete</a>
                 </td>
-                <td><a th:href="@{/editsong/{id}(id=${song.songId})}" class="btn btn-warning">Edit</a></td>
+                <td><a th:href="@{/editgenre/{id}(id=${genre.genreId})}" class="btn btn-warning">Edit</a></td>
             </tr>
         </tbody>
     </table>
-    <a href="/addsong" class="btn btn-success">Add Song</a>
+    <a href="/addgenre" class="btn btn-success">Add Song</a>
     <div style="clear: both; display: block; height: 20px;"></div>
-    <a href="/artistlist" class="btn btn-primary">Go to artist</a>
-    <div style="clear: both; display: block; height: 20px;"></div>
-    <a href="/albumlist" class="btn btn-primary">Go to albums</a>
+    <a href="/index" class="btn btn-primary">Return to home page</a>
+
 </body>
 
 </html>
