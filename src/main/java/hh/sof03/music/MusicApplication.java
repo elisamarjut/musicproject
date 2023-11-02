@@ -40,11 +40,13 @@ public class MusicApplication {
 			artistRepository.save(art3);
 
 			log.info("Save a few genres");
-			Genre g1 = new Genre("Tropipop", null, null);
-			Genre g2 = new Genre("Pop", null, null);
+			Genre g1 = new Genre("Undefined", null, null);
+			Genre g2 = new Genre("Tropipop", null, null);
+			Genre g3 = new Genre("Pop", null, null);
 
 			genreRepository.save(g1);
 			genreRepository.save(g2);
+			genreRepository.save(g3);
 
 			log.info("Save a few albums");
 			Album album1 = new Album("Pehmee", 2023, art2, null, null);
@@ -54,11 +56,11 @@ public class MusicApplication {
 			albumRepository.save(album2);
 
 			log.info("Save a few songs");
-			Song s1 = new Song("Tässä on kaikki", 2.47, null, g2,
+			Song s1 = new Song("Tässä on kaikki", 2.47, null, g3,
 					null);
-			Song s2 = new Song("Kyynelii", 3.23, null, g2,
+			Song s2 = new Song("Kyynelii", 3.23, null, g3,
 					album1);
-			Song s3 = new Song("Junio", 2.48, null, g1,
+			Song s3 = new Song("Junio", 2.48, null, g2,
 					album2);
 
 			songRepository.save(s1);
