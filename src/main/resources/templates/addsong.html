@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add song</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/128/6654/6654978.png">
+</head>
+
+<body>
+    <h1>Add song</h1>
+    <form th:object="${song}" th:action="@{savesong}" action="#" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" th:field="*{songName}" class="form-control" />
+        <div style="clear: both; display: block; height: 10px;"></div>
+        <label for="length">Length</label>
+        <input type="text" id="length" th:field="*{length}" class="form-control" />
+        <div style="clear: both; display: block; height: 10px;"></div>
+        <label for="artists">Artist(s)</label>
+        <input type="text" id="artists" th:field="*{artists}" class="form-control" />
+        <div style="clear: both; display: block; height: 10px;"></div>
+        <label for="year">Album</label>
+        <input type="text" id="album" th:field="*{album}" class="form-control" />
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <label for="genres">Genre</label>
+        <select th:field="*{genre}" name="genres" id="genres" class="form-control">
+            <option th:each="genre : ${genres}" th:value="${genre.genreId}" th:text="${genre.genreName}">
+            </option>
+        </select>
+        <div style="clear: both; display: block; height: 10px;"></div>
+
+        <input type="submit" class="btn btn-primary" value="Save" />
+    </form>
+
+</body>
+
+</html>
