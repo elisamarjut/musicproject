@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -40,7 +41,7 @@ public class SongController {
         return "add/addsong";
     }
 
-    // Save song
+    // Save a new song
     @PostMapping("/savesong")
     public String saveSong(Song song) {
         songRepository.save(song);
@@ -60,5 +61,12 @@ public class SongController {
         model.addAttribute("song", songRepository.findById(songId));
         model.addAttribute("genres", genreRepository.findAll());
         return "edit/editsong";
+    }
+
+    // Save edited song
+    @PostMapping("/saveeditsong")
+    public String saveEditSong(@ModelAttribute("song") Song song) {
+        songRepository.save(song);
+        return "redirect:/list/songlist";
     }
 }
