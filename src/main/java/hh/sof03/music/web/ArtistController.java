@@ -13,9 +13,20 @@ public class ArtistController {
     @Autowired
     private ArtistRepository artistRepository;
 
+    // List all artists
     @RequestMapping("/list/artistlist")
     public String listArtists(Model model) {
         model.addAttribute("artists", artistRepository.findAll());
         return "list/artistlist";
     }
+
+    // Add a new artist
+
+    // Save new artist
+
+    // Delete artist
+
+    // Edit artist
+
+    // Save edited artist
 }

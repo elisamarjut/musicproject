@@ -11,7 +11,7 @@
 <body>
     <h1>Edit song</h1>
 
-    <form th:object="${song}" th:action="@{../savesong}" action="#" method="post">
+    <form th:object="${song}" th:action="@{/saveeditsong}" action="#" method="post">
         <input type="hidden" id="id" th:field="*{songId}" readonly="readonly" class="form-control" />
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{songName}" class="form-control" />
