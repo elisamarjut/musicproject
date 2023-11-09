@@ -23,20 +23,18 @@
             <tr>
                 <th>Name</th>
                 <th>Songs</th>
-                <th>Albums</th>
             </tr>
             <tr th:each="genre : ${genres}">
                 <td th:text="${genre.genreName}">Name</td>
-                <!-- <td th:text="${genre.songs}">Songs</td>
-                <td th:text="${genre.albums}">Albums</td> -->
+                <!-- <td th:text="${genre.songs}">Songs</td> -->
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/deletegenre/{id}(id=${genre.genreId})}" class="btn btn-danger">Delete</a>
                 </td>
-                <td><a th:href="@{/editgenre/{id}(id=${genre.genreId})}" class="btn btn-warning">Edit</a></td>
+                <td><a th:href="@{/edit/editgenre/{id}(id=${genre.genreId})}" class="btn btn-warning">Edit</a></td>
             </tr>
         </tbody>
     </table>
-    <a href="/add/addgenre" class="btn btn-success">Add Song</a>
+    <a href="/add/addgenre" class="btn btn-success">Add Genre</a>
     <div style="clear: both; display: block; height: 20px;"></div>
     <a href="/index" class="btn btn-primary">Return to home page</a>
 

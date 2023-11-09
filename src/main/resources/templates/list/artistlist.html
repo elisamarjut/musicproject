@@ -34,11 +34,11 @@
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/deleteartist/{id}(id=${artist.artistId})}" class="btn btn-danger">Delete</a>
                 </td>
-                <td><a th:href="@{/editartist/{id}(id=${artist.artistId})}" class="btn btn-warning">Edit</a></td>
+                <td><a th:href="@{/edit/editartist/{id}(id=${artist.artistId})}" class="btn btn-warning">Edit</a></td>
             </tr>
         </tbody>
     </table>
-    <a href="/add/addartist" class="btn btn-success">Add Song</a>
+    <a href="/add/addartist" class="btn btn-success">Add Artist</a>
     <div style="clear: both; display: block; height: 20px;"></div>
     <a href="/index" class="btn btn-primary">Return to home page</a>
 </body>

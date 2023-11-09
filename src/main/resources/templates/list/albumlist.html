@@ -24,21 +24,17 @@
                 <th>Name</th>
                 <th>Published</th>
                 <th>Artist</th>
-                <th>Genre</th>
                 <th>Songs</th>
-                <th></th>
-                <th></th>
 
             </tr>
             <tr th:each="album : ${albums}">
                 <td th:text="${album.albumName}">Name</td>
                 <td th:text="${album.publishYear}">Publishing year</td>
                 <td th:text="${album.artist}">Artist</td>
-                <td th:text="${album.genre}">Genre</td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/deletealbum/{id}(id=${album.albumId})}" class="btn btn-danger">Delete</a>
                 </td>
-                <td><a th:href="@{/editalbum/{id}(id=${album.albumId})}" class="btn btn-warning">Edit</a></td>
+                <td><a th:href="@{/edit/editalbum/{id}(id=${album.albumId})}" class="btn btn-warning">Edit</a></td>
             </tr>
         </tbody>
     </table>

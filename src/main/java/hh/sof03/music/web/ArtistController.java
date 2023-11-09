@@ -3,8 +3,12 @@ package hh.sof03.music.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import hh.sof03.music.domain.Artist;
 import hh.sof03.music.domain.ArtistRepository;
 
 @Controller
@@ -14,19 +18,44 @@ public class ArtistController {
     private ArtistRepository artistRepository;
 
     // List all artists
-    @RequestMapping("/list/artistlist")
+    @GetMapping("/list/artistlist")
     public String listArtists(Model model) {
         model.addAttribute("artists", artistRepository.findAll());
         return "list/artistlist";
     }
 
     // Add a new artist
+    @GetMapping("/add/addartist")
+    public String addArtist(Model model) {
+        model.addAttribute("artist", new Artist());
+        return "add/addartist";
+    }
 
     // Save new artist
+    @PostMapping("/saveartist")
+    public String saveArtist(Artist artist) {
+        artistRepository.save(artist);
+        return "redirect:/list/artistlist";
+    }
 
     // Delete artist
+    @GetMapping("/deleteartist/{id}")
+    public String deleteArtisr(@PathVariable("id") Long artistId, Model model) {
+        artistRepository.deleteById(artistId);
+        return "redirect:../list/artistlist";
+    }
 
     // Edit artist
+    @GetMapping("/edit/editartist/{id}")
+    public String editArtist(@PathVariable("id") Long artistId, Model model) {
+        model.addAttribute("artist", artistRepository.findById(artistId));
+        return "edit/editartist";
+    }
 
     // Save edited artist
+    @PostMapping("/saveeditartist")
+    public String saveEditArtist(@ModelAttribute("artist") Artist artist) {
+        artistRepository.save(artist);
+        return "redirect:/list/artistlist";
+    }
 }
