@@ -1,12 +1,15 @@
 package hh.sof03.music.domain;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -20,8 +23,10 @@ public class Song {
     private String songName;
     private double length;
 
-    @ManyToMany
-    private List<Artist> artists;
+    @ManyToMany(cascade = { CascadeType.MERGE })
+    @JoinTable(name = "Songs_artist", joinColumns = { @JoinColumn(name = "songId") }, inverseJoinColumns = {
+            @JoinColumn(name = "artistId") })
+    Set<Artist> artists = new HashSet<>();
 
     @ManyToOne // Song @ManyToOne Genre
     @JoinColumn(name = "genreId")
@@ -33,7 +38,7 @@ public class Song {
     public Song() {
     }
 
-    public Song(String songName, double length, List<Artist> artists, Genre genre, Album album) {
+    public Song(String songName, double length, Set<Artist> artists, Genre genre, Album album) {
         this.songName = songName;
         this.length = length;
         this.artists = artists;
@@ -65,11 +70,11 @@ public class Song {
         this.length = length;
     }
 
-    public List<Artist> getArtists() {
+    public Set<Artist> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<Artist> artists) {
+    public void setArtists(Set<Artist> artists) {
         this.artists = artists;
     }
 
