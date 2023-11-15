@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import hh.sof03.music.domain.AlbumRepository;
+import hh.sof03.music.domain.ArtistRepository;
 import hh.sof03.music.domain.GenreRepository;
 import hh.sof03.music.domain.Song;
 import hh.sof03.music.domain.SongRepository;
@@ -26,6 +28,12 @@ public class SongController {
 
     @Autowired
     private GenreRepository genreRepository;
+
+    @Autowired
+    private AlbumRepository albumRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     @GetMapping({ "/", "index" })
     public String welcome() {
@@ -44,6 +52,8 @@ public class SongController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String addSong(Model model) {
         model.addAttribute("song", new Song());
+        model.addAttribute("artists", artistRepository.findAll());
+        model.addAttribute("albums", albumRepository.findAll());
         model.addAttribute("genres", genreRepository.findAll());
         return "add/addsong";
     }
@@ -52,6 +62,8 @@ public class SongController {
     @PostMapping("/savesong")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String saveSong(@Valid Song song, BindingResult bindingResult, Model model) {
+        model.addAttribute("artists", artistRepository.findAll());
+        model.addAttribute("albums", albumRepository.findAll());
         model.addAttribute("genres", genreRepository.findAll());
         if (bindingResult.hasErrors()) {
             return "add/addsong";
@@ -74,6 +86,8 @@ public class SongController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String editSong(@PathVariable("id") Long songId, Model model) {
         model.addAttribute("song", songRepository.findById(songId));
+        model.addAttribute("artists", artistRepository.findAll());
+        model.addAttribute("albums", albumRepository.findAll());
         model.addAttribute("genres", genreRepository.findAll());
         return "edit/editsong";
     }
@@ -82,6 +96,8 @@ public class SongController {
     @PostMapping("/saveeditsong")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String saveEditSong(@Valid @ModelAttribute("song") Song song, BindingResult bindingResult, Model model) {
+        model.addAttribute("artists", artistRepository.findAll());
+        model.addAttribute("albums", albumRepository.findAll());
         model.addAttribute("genres", genreRepository.findAll());
         if (bindingResult.hasErrors()) {
             return "edit/editsong";

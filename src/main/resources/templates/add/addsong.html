@@ -18,11 +18,17 @@
         <label for="length">Length</label>
         <input type="text" id="length" th:field="*{length}" class="form-control" />
         <div style="clear: both; display: block; height: 10px;"></div>
+
         <label for="artists">Artist(s)</label>
-        <input type="text" id="artists" th:field="*{artists}" class="form-control" />
+        <select th:field="*{artists}" name="artists" id="artists" class="form-control" multiple>
+            <option th:each="artist : ${artists}" th:value="${artist.artistId}" th:text="${artist.artistName}"></option>
+        </select>
         <div style="clear: both; display: block; height: 10px;"></div>
-        <label for="year">Album</label>
-        <input type="text" id="album" th:field="*{album}" class="form-control" />
+
+        <label for="albums">Album</label>
+        <select th:field="*{album}" name="albums" id="albums" class="form-control">
+            <option th:each="album : ${albums}" th:value="${album.albumId}" th:text="${album.albumName}"></option>
+        </select>
         <div style="clear: both; display: block; height: 10px;"></div>
 
         <label for="genres">Genre</label>
