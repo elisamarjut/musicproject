@@ -3,6 +3,7 @@ package hh.sof03.music.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import hh.sof03.music.domain.GenreRepository;
 import hh.sof03.music.domain.Song;
 import hh.sof03.music.domain.SongRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class SongController {
@@ -43,9 +45,14 @@ public class SongController {
 
     // Save a new song
     @PostMapping("/savesong")
-    public String saveSong(Song song) {
-        songRepository.save(song);
-        return "redirect:/list/songlist";
+    public String saveSong(@Valid Song song, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "add/addsong";
+        } else {
+            songRepository.save(song);
+            return "redirect:/list/songlist";
+        }
+
     }
 
     // Delete song

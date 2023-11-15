@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Song {
@@ -20,6 +21,7 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long songId;
 
+    @NotEmpty
     private String songName;
     private double length;
 
