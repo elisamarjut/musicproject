@@ -46,13 +46,13 @@ public class SongController {
     // Save a new song
     @PostMapping("/savesong")
     public String saveSong(@Valid Song song, BindingResult bindingResult, Model model) {
+        model.addAttribute("genres", genreRepository.findAll());
         if (bindingResult.hasErrors()) {
             return "add/addsong";
         } else {
             songRepository.save(song);
             return "redirect:/list/songlist";
         }
-
     }
 
     // Delete song
@@ -72,8 +72,13 @@ public class SongController {
 
     // Save edited song
     @PostMapping("/saveeditsong")
-    public String saveEditSong(@ModelAttribute("song") Song song) {
-        songRepository.save(song);
-        return "redirect:/list/songlist";
+    public String saveEditSong(@Valid @ModelAttribute("song") Song song, BindingResult bindingResult, Model model) {
+        model.addAttribute("genres", genreRepository.findAll());
+        if (bindingResult.hasErrors()) {
+            return "edit/editsong";
+        } else {
+            songRepository.save(song);
+            return "redirect:/list/songlist";
+        }
     }
 }
