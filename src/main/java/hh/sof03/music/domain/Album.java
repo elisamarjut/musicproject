@@ -24,21 +24,16 @@ public class Album {
     @JoinColumn(name = "artistId") // foreign key määritys tietokannan Album-taulua varten
     private Artist artist;
 
-    @ManyToOne // Album @ManyToOne Genre
-    @JoinColumn(name = "genreId") // foreign key määritys tietokannan Album-taulua varten
-    private Genre genre;
-
     @OneToMany // Album @OneToMany Song
     private List<Song> songs;
 
     public Album() {
     }
 
-    public Album(String albumName, int publishYear, Artist artist, Genre genre, List<Song> songs) {
+    public Album(String albumName, int publishYear, Artist artist, List<Song> songs) {
         this.albumName = albumName;
         this.publishYear = publishYear;
         this.artist = artist;
-        this.genre = genre;
         this.songs = songs;
     }
 
@@ -72,14 +67,6 @@ public class Album {
 
     public void setArtist(Artist artist) {
         this.artist = artist;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
     }
 
     public List<Song> getSongs() {

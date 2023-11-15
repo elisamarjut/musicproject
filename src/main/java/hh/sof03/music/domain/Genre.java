@@ -20,16 +20,12 @@ public class Genre {
     @OneToMany // Genre @OneToMany Song
     private List<Song> songs;
 
-    @OneToMany // Genre @OneToMany Album
-    private List<Album> albums;
-
     public Genre() {
     }
 
-    public Genre(String genreName, List<Song> songs, List<Album> albums) {
+    public Genre(String genreName, List<Song> songs) {
         this.genreName = genreName;
         this.songs = songs;
-        this.albums = albums;
     }
 
     public long getGenreId() {
@@ -54,14 +50,6 @@ public class Genre {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
-    }
-
-    public List<Album> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
     }
 
     @Override
