@@ -22,7 +22,8 @@
                 <th>Published</th>
                 <th>Artist</th>
                 <th>Songs</th>
-
+                <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
             </tr>
             <tr th:each="album : ${albums}">
                 <td th:text="${album.albumName}">Name</td>

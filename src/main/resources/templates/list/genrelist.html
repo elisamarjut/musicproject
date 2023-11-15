@@ -21,6 +21,8 @@
             <tr>
                 <th>Name</th>
                 <th>Songs</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
             </tr>
             <tr th:each="genre : ${genres}">
                 <td th:text="${genre.genreName}">Name</td>

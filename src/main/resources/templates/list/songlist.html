@@ -24,6 +24,8 @@
                 <!--<th>Artist</th> -->
                 <th>Genre</th>
                 <th>Album</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+                <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
             </tr>
             <tr th:each="song : ${songs}">
                 <td th:text="${song.songName}">Name</td>
