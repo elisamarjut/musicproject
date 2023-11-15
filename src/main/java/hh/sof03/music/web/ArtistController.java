@@ -3,6 +3,7 @@ package hh.sof03.music.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class ArtistController {
 
     // Add a new artist
     @GetMapping("/add/addartist")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addArtist(Model model) {
         model.addAttribute("artist", new Artist());
         return "add/addartist";
@@ -38,6 +40,7 @@ public class ArtistController {
 
     // Save new artist
     @PostMapping("/saveartist")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveArtist(@Valid Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "add/addartist";
@@ -45,11 +48,11 @@ public class ArtistController {
             artistRepository.save(artist);
             return "redirect:/list/artistlist";
         }
-
     }
 
     // Delete artist
     @GetMapping("/deleteartist/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteArtisr(@PathVariable("id") Long artistId, Model model) {
         artistRepository.deleteById(artistId);
         return "redirect:../list/artistlist";
@@ -57,6 +60,7 @@ public class ArtistController {
 
     // Edit artist
     @GetMapping("/edit/editartist/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String editArtist(@PathVariable("id") Long artistId, Model model) {
         model.addAttribute("artist", artistRepository.findById(artistId));
         return "edit/editartist";
@@ -64,6 +68,7 @@ public class ArtistController {
 
     // Save edited artist
     @PostMapping("/saveeditartist")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveEditArtist(@Valid @ModelAttribute("artist") Artist artist, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "edit/editartist";
@@ -71,7 +76,6 @@ public class ArtistController {
             artistRepository.save(artist);
             return "redirect:/list/artistlist";
         }
-
     }
 
     // RESTful service to gel all artists

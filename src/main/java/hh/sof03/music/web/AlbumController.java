@@ -3,6 +3,7 @@ package hh.sof03.music.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ public class AlbumController {
     @Autowired
     private AlbumRepository albumRepository;
 
+    // List all albums
     @GetMapping("/list/albumlist")
     public String listAlbums(Model model) {
         model.addAttribute("albums", albumRepository.findAll());
@@ -32,6 +34,7 @@ public class AlbumController {
 
     // Add a new album
     @GetMapping("/add/addalbum")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addAlbum(Model model) {
         model.addAttribute("album", new Album());
         return "add/addalbum";
@@ -39,6 +42,7 @@ public class AlbumController {
 
     // Save new album
     @PostMapping("/savealbum")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveAlbum(@Valid Album album, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "add/addalbum";
@@ -50,6 +54,7 @@ public class AlbumController {
 
     // Delete album
     @GetMapping("/deletealbum/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteAlbum(@PathVariable("id") Long albumId, Model model) {
         albumRepository.deleteById(albumId);
         return "redirect:../list/albumlist";
@@ -57,6 +62,7 @@ public class AlbumController {
 
     // Edit album
     @GetMapping("/edit/editalbum/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String editALbum(@PathVariable("id") Long albumId, Model model) {
         model.addAttribute("album", albumRepository.findById(albumId));
         return "edit/editalbum";
@@ -64,6 +70,7 @@ public class AlbumController {
 
     // Save edited album
     @PostMapping("/saveeditalbum")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveEditAlbum(@Valid @ModelAttribute("album") Album album, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "edit/editalbum";
