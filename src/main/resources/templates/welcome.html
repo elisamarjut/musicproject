@@ -14,10 +14,20 @@
 </head>
 
 <body>
-    <h1>🎶💗 Welcome to my MusicApp! 💗🎶</h1>
+    <h1>🎶🌸 Welcome to my MusicApp! 🌸🎶</h1>
     <br />
+
+    <h3 sec:authorize="hasAuthority('ADMIN')">Hello <span sec:authentication="name"></span>!</h3>
+    <div style="clear: both; display: block; height: 20px;"></div>
+
     <p>Here you can find recommendations of songs, artists, albums and genres</p>
-    <p>Feel free to add in your favorites as well!</p>
+    <p sec:authorize="hasAuthority('ADMIN')">Feel free to add in your favorites as well!</p>
+
+    <div style="padding:20px 0">
+        <a href="/login" sec:authorize="isAnonymous()" class="btn btn-sm btn-success">Sign in</a>
+        <a href="/logout" sec:authorize="hasAuthority('ADMIN')" class="btn btn-sm btn-danger">Sign out</a>
+    </div>
+
     <div>
         <div style="clear: both; display: block; height: 20px;"></div>
         <a href="/list/songlist" class="btn btn-primary">List of song recommendations</a>
