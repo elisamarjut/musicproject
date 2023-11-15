@@ -20,13 +20,11 @@
         <tbody>
             <tr>
                 <th>Name</th>
-                <th>Songs</th>
                 <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
                 <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
             </tr>
             <tr th:each="genre : ${genres}">
                 <td th:text="${genre.genreName}">Name</td>
-                <!-- <td th:text="${genre.songs}">Songs</td> -->
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/deletegenre/{id}(id=${genre.genreId})}" class="btn btn-danger">Delete</a>
                 </td>
