@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                                                 .requestMatchers(antMatcher("/")).permitAll()
                                                 .requestMatchers(antMatcher("/index")).permitAll()
                                                 .requestMatchers(antMatcher("/list/**")).permitAll()
+                                                .requestMatchers(antMatcher("/rest/list/**")).permitAll()
                                                 .anyRequest().authenticated())
                                 .csrf(csrf -> csrf
                                                 .ignoringRequestMatchers(toH2Console()))

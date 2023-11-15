@@ -1,18 +1,23 @@
 package hh.sof03.music.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.sof03.music.domain.Album;
 import hh.sof03.music.domain.AlbumRepository;
 import jakarta.validation.Valid;
 
+@CrossOrigin
 @Controller
 public class AlbumController {
 
@@ -67,4 +72,11 @@ public class AlbumController {
             return "redirect:/list/albumlist";
         }
     }
+
+    // RESTful service to get all albums
+    @GetMapping("/rest/list/albums")
+    public @ResponseBody List<Album> albumListRest() {
+        return (List<Album>) albumRepository.findAll();
+    }
+
 }

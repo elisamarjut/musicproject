@@ -1,5 +1,7 @@
 package hh.sof03.music.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.sof03.music.domain.Genre;
 import hh.sof03.music.domain.GenreRepository;
@@ -67,5 +70,11 @@ public class GenreController {
             return "redirect:/list/genrelist";
         }
 
+    }
+
+    // RESTful service to get all genres
+    @GetMapping("/rest/list/genres")
+    public @ResponseBody List<Genre> genreListRest() {
+        return (List<Genre>) genreRepository.findAll();
     }
 }

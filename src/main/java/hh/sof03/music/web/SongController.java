@@ -1,5 +1,7 @@
 package hh.sof03.music.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.sof03.music.domain.GenreRepository;
 import hh.sof03.music.domain.Song;
@@ -80,5 +83,11 @@ public class SongController {
             songRepository.save(song);
             return "redirect:/list/songlist";
         }
+    }
+
+    // RESTful service to get all songs
+    @GetMapping("/rest/list/songs")
+    public @ResponseBody List<Song> songListRest() {
+        return (List<Song>) songRepository.findAll();
     }
 }
