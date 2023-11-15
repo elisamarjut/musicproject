@@ -21,7 +21,7 @@
             <tr>
                 <th>Song</th>
                 <th>Length</th>
-                <!--<th>Artist</th> -->
+                <th>Artist(s)</th>
                 <th>Genre</th>
                 <th>Album</th>
                 <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
@@ -30,9 +30,9 @@
             <tr th:each="song : ${songs}">
                 <td th:text="${song.songName}">Name</td>
                 <td th:text="${song.length}">Length</td>
-                <!-- <td th:text="${song.artists}">Artist</td> -->
+                <td th:text="${song.artists}">Artist</td>
                 <td th:text="${song.genre}">Genre</td>
-                <td th:text="${song.album!=null?song.album.albumName:''}">Album</td>
+                <td th:text="${song.album!=null?song.album.albumName:'Single release'}">Album</td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a th:href="@{/deletesong/{id}(id=${song.songId})}" class="btn btn-danger">Delete</a>
                 </td>
