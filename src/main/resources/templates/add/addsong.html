@@ -23,6 +23,7 @@
         <select th:field="*{artists}" name="artists" id="artists" class="form-control" multiple>
             <option th:each="artist : ${artists}" th:value="${artist.artistId}" th:text="${artist.artistName}"></option>
         </select>
+        <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
         <div style="clear: both; display: block; height: 10px;"></div>
 
         <label for="albums">Album</label>
