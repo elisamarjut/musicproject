@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.sof03.music.domain.Album;
 import hh.sof03.music.domain.AlbumRepository;
+import hh.sof03.music.domain.ArtistRepository;
 import jakarta.validation.Valid;
 
 @CrossOrigin
@@ -24,6 +25,9 @@ public class AlbumController {
 
     @Autowired
     private AlbumRepository albumRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     // List all albums
     @GetMapping("/list/albumlist")
@@ -37,13 +41,15 @@ public class AlbumController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String addAlbum(Model model) {
         model.addAttribute("album", new Album());
+        model.addAttribute("artists", artistRepository.findAll());
         return "add/addalbum";
     }
 
     // Save new album
     @PostMapping("/savealbum")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String saveAlbum(@Valid Album album, BindingResult bindingResult) {
+    public String saveAlbum(@Valid Album album, BindingResult bindingResult, Model model) {
+        model.addAttribute("artists", artistRepository.findAll());
         if (bindingResult.hasErrors()) {
             return "add/addalbum";
         } else {
@@ -65,13 +71,15 @@ public class AlbumController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String editALbum(@PathVariable("id") Long albumId, Model model) {
         model.addAttribute("album", albumRepository.findById(albumId));
+        model.addAttribute("artists", artistRepository.findAll());
         return "edit/editalbum";
     }
 
     // Save edited album
     @PostMapping("/saveeditalbum")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String saveEditAlbum(@Valid @ModelAttribute("album") Album album, BindingResult bindingResult) {
+    public String saveEditAlbum(@Valid @ModelAttribute("album") Album album, BindingResult bindingResult, Model model) {
+        model.addAttribute("artists", artistRepository.findAll());
         if (bindingResult.hasErrors()) {
             return "edit/editalbum";
         } else {

@@ -18,9 +18,10 @@
         <label for="publishYear">Published in</label>
         <input type="text" id="publishYear" th:field="*{publishYear}" class="form-control" />
         <div style="clear: both; display: block; height: 10px;"></div>
-        <label for="artist">Artist</label>
-        <input type="text" id="artist" th:field="*{artist}" class="form-control" />
-
+        <label for="artists">Artist(s)</label>
+        <select th:field="*{artist}" name="artists" id="artists" class="form-control">
+            <option th:each="artist : ${artists}" th:value="${artist.artistId}" th:text="${artist.artistName}"></option>
+        </select>
         <div style="clear: both; display: block; height: 10px;"></div>
 
         <input type="submit" class="btn btn-primary" value="Save" />

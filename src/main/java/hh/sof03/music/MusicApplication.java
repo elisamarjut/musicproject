@@ -31,6 +31,15 @@ public class MusicApplication {
 			ArtistRepository artistRepository, AlbumRepository albumRepository, GenreRepository genreRepository) {
 		return (args) -> {
 
+			log.info("Save a few genres");
+			Genre g1 = new Genre("Undefined", null);
+			Genre g2 = new Genre("Tropipop", null);
+			Genre g3 = new Genre("Pop", null);
+
+			genreRepository.save(g1);
+			genreRepository.save(g2);
+			genreRepository.save(g3);
+
 			log.info("Save a few artists");
 			Artist art1 = new Artist("Unknown", 0, null, null);
 			Artist art2 = new Artist("Evelina", 2012, null, null);
@@ -41,15 +50,6 @@ public class MusicApplication {
 			artistRepository.save(art2);
 			artistRepository.save(art3);
 			artistRepository.save(art4);
-
-			log.info("Save a few genres");
-			Genre g1 = new Genre("Undefined", null);
-			Genre g2 = new Genre("Tropipop", null);
-			Genre g3 = new Genre("Pop", null);
-
-			genreRepository.save(g1);
-			genreRepository.save(g2);
-			genreRepository.save(g3);
 
 			log.info("Save a few albums");
 			Album album1 = new Album("Unknown", 0, art1, null);

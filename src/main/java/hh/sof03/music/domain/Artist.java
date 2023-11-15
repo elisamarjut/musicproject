@@ -1,8 +1,7 @@
 package hh.sof03.music.domain;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +23,7 @@ public class Artist {
     private int startingYear;
 
     @ManyToMany(mappedBy = "artists")
-    private Set<Song> songs = new HashSet<>();
+    private List<Song> songs = new ArrayList<Song>();
 
     @OneToMany // Artist @OneToMany Album
     private List<Album> albums;
@@ -32,7 +31,7 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String artistName, int startingYear, Set<Song> songs, List<Album> albums) {
+    public Artist(String artistName, int startingYear, List<Song> songs, List<Album> albums) {
         this.artistName = artistName;
         this.startingYear = startingYear;
         this.songs = songs;
@@ -63,11 +62,11 @@ public class Artist {
         this.startingYear = startingYear;
     }
 
-    public Set<Song> getSongs() {
+    public List<Song> getSongs() {
         return songs;
     }
 
-    public void setSongs(Set<Song> songs) {
+    public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
 
