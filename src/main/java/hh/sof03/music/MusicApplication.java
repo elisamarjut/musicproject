@@ -15,6 +15,7 @@ import hh.sof03.music.domain.Genre;
 import hh.sof03.music.domain.GenreRepository;
 import hh.sof03.music.domain.Song;
 import hh.sof03.music.domain.SongRepository;
+import hh.sof03.music.domain.User;
 import hh.sof03.music.domain.UserRepository;
 
 @SpringBootApplication
@@ -40,17 +41,17 @@ public class MusicApplication {
 			artistRepository.save(art3);
 
 			log.info("Save a few genres");
-			Genre g1 = new Genre("Undefined", null, null);
-			Genre g2 = new Genre("Tropipop", null, null);
-			Genre g3 = new Genre("Pop", null, null);
+			Genre g1 = new Genre("Undefined", null);
+			Genre g2 = new Genre("Tropipop", null);
+			Genre g3 = new Genre("Pop", null);
 
 			genreRepository.save(g1);
 			genreRepository.save(g2);
 			genreRepository.save(g3);
 
 			log.info("Save a few albums");
-			Album album1 = new Album("Pehmee", 2023, art2, null, null);
-			Album album2 = new Album("Don Juan", 2023, art3, null, null);
+			Album album1 = new Album("Pehmee", 2023, art2, null);
+			Album album2 = new Album("Don Juan", 2023, art3, null);
 
 			albumRepository.save(album1);
 			albumRepository.save(album2);
@@ -67,6 +68,11 @@ public class MusicApplication {
 			songRepository.save(s2);
 			songRepository.save(s3);
 
+			// Creating user: admin/admin
+			User user1 = new User("admin", "$2a$10$uuY8JpD4EwyvBh0GKDn1u.55msv3CPSIFWjH4pQo0YiGD6E8/8zr6",
+					"admin@mail.com", "ADMIN");
+
+			userRepository.save(user1);
 		};
 	}
 
