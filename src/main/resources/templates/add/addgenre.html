@@ -13,6 +13,7 @@
     <form th:object="${genre}" th:action="@{../savegenre}" action="#" method="post">
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{genreName}" class="form-control" />
+        <div th:if="${#fields.hasErrors('genreName')}" th:errors="*{genreName}">Error</div>
 
         <div style="clear: both; display: block; height: 10px;"></div>
 

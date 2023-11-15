@@ -13,6 +13,7 @@
     <form th:object="${album}" th:action="@{../savealbum}" action="#" method="post">
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{albumName}" class="form-control" />
+        <div th:if="${#fields.hasErrors('albumName')}" th:errors="*{albumName}">Error</div>
         <div style="clear: both; display: block; height: 10px;"></div>
         <label for="publishYear">Published in</label>
         <input type="text" id="publishYear" th:field="*{publishYear}" class="form-control" />

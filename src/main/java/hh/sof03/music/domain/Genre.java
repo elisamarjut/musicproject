@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Genre {
@@ -15,6 +16,7 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long genreId;
 
+    @NotEmpty
     private String genreName;
 
     @OneToMany // Genre @OneToMany Song

@@ -3,6 +3,7 @@ package hh.sof03.music.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import hh.sof03.music.domain.Genre;
 import hh.sof03.music.domain.GenreRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class GenreController {
@@ -32,9 +34,13 @@ public class GenreController {
 
     // Save new genre
     @PostMapping("/savegenre")
-    public String saveGenre(Genre genre) {
-        genreRepository.save(genre);
-        return "redirect:/list/genrelist";
+    public String saveGenre(@Valid Genre genre, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "add/addgenre";
+        } else {
+            genreRepository.save(genre);
+            return "redirect:/list/genrelist";
+        }
     }
 
     // Delete genre
@@ -53,8 +59,13 @@ public class GenreController {
 
     // Save edited genre
     @PostMapping("/saveeditgenre")
-    public String saveEditGenre(@ModelAttribute("genre") Genre genre) {
-        genreRepository.save(genre);
-        return "redirect:/list/genrelist";
+    public String saveEditGenre(@Valid @ModelAttribute("genre") Genre genre, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit/editgenre";
+        } else {
+            genreRepository.save(genre);
+            return "redirect:/list/genrelist";
+        }
+
     }
 }

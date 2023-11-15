@@ -15,6 +15,7 @@
         <input type="hidden" id="id" th:field="*{artistId}" readonly="readonly" class="form-control" />
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{artistName}" class="form-control" />
+        <div th:if="${#fields.hasErrors('artistName')}" th:errors="*{artistName}">Error</div>
         <div style="clear: both; display: block; height: 10px;"></div>
         <label for="startingYear">Active from</label>
         <input type="text" id="startingYear" th:field="*{startingYear}" class="form-control" />

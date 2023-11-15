@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Artist {
@@ -18,6 +19,7 @@ public class Artist {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long artistId;
 
+    @NotEmpty
     private String artistName;
     private int startingYear;
 
